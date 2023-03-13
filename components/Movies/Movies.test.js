@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Movies from ".";
 import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
 
 const initialMovies = [
   {
@@ -60,7 +61,9 @@ test("renders a new movie when the form is submitted with a new movie name", asy
   const button = screen.getByRole("button", { name: "Add" });
 
   // click on the submit button
-  await user.click(button);
+  await act(async () => {
+    await user.click(button);
+  });
 
   const matrixHeading = screen.getByRole("heading", { name: "The Matrix" });
 
